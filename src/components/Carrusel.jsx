@@ -1,7 +1,18 @@
 import React from "react";
-import { StyleSheet, ScrollView, Text, View } from "react-native";
+import { StyleSheet, ScrollView, Text, View, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import theme from "../theme";
 const App = () => {
+  const navigation = useNavigation();
+
+  const handleButton1Press = () => {
+    navigation.navigate("Iniciar sesión");
+  };
+
+  const handleButton2Press = () => {
+    navigation.navigate("Registrarme");
+  };
   return (
     <View>
       <View style={styles.box1}></View>
@@ -20,6 +31,10 @@ const App = () => {
         <Text style={styles.text}>Texto 4</Text>
         <Text style={styles.text}>Texto 5</Text>
       </ScrollView>
+      <View style={styles.containerButton}>
+        <Button title="Iniciar sesión" onPress={handleButton1Press} />
+        <Button title="Registrarme" onPress={handleButton2Press} />
+      </View>
     </View>
   );
 };
@@ -48,6 +63,12 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.ligth,
     position: "absolute", // Asegura que este cuadro se muestre sobre el otro
     margin: 20,
+  },
+  containerButton: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 50,
+    marginTop: 50,
   },
 });
 

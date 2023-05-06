@@ -1,13 +1,15 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import Logo from "../components/Logo";
-import RegisterForm from "../components/RegisterForm";
+import LoginForm from "../components/LoginForm";
 
-const Register = () => {
+const Login = () => {
   return (
     <View style={styles.color}>
-      <Logo />
-      <RegisterForm />
+      <View>
+        <Logo />
+        <LoginForm />
+      </View>
     </View>
   );
 };
@@ -15,8 +17,9 @@ const Register = () => {
 const styles = StyleSheet.create({
   color: {
     backgroundColor: "#eff0f1",
-    flexGrow: 1,
+    height: 850,
+    paddingTop: 100,
   },
 });
 
-export default Register;
+export default Login;

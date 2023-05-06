@@ -1,34 +1,59 @@
-import React from "react";
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import theme from "../theme";
 
 const Home = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+  };
+
+  const handleConfirmPasswordChange = (text) => {
+    setConfirmPassword(text);
+  };
+
+  const handleSubmit = () => {
+    if (password === confirmPassword) {
+      console.log("Contraseñas coinciden");
+    } else {
+      console.log("Las contraseñas no coinciden");
+    }
+  };
   return (
     <View style={styles.container}>
       <TextInput
         variant="outline"
         size="md"
-        placeholder="Primer Nombre"
+        placeholder="Primer nombre"
         w="100%"
         style={styles.input}
       />
       <TextInput
         variant="outline"
         size="md"
-        placeholder="Segundo Nombre"
+        placeholder="Segundo nombre"
         w="100%"
         style={styles.input}
       />
       <TextInput
         variant="outline"
         size="md"
-        placeholder="Primer Apellido"
+        placeholder="Primer apellido"
         w="100%"
         style={styles.input}
       />
       <TextInput
         variant="outline"
         size="md"
-        placeholder="Segundo Apellido"
+        placeholder="Segundo apellido"
         w="100%"
         style={styles.input}
       />
@@ -46,13 +71,31 @@ const Home = () => {
         w="100%"
         style={styles.input}
       />
-      <Button
-        variant="solid"
-        colorScheme="lightBlue"
-        size="md"
-        title="Registrarme"
-        style={styles.buttonOptions}
+      <TextInput
+        style={styles.input}
+        placeholder="Contraseña"
+        secureTextEntry
+        value={password}
+        onChangeText={handlePasswordChange}
       />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirmar contraseña"
+        secureTextEntry
+        value={confirmPassword}
+        onChangeText={handleConfirmPasswordChange}
+      />
+      <TouchableOpacity style={styles.buttonOptions} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Registarme</Text>
+      </TouchableOpacity>
+      <View style={styles.container}>
+        <Text style={styles.textInicioSesion}> ¿Ya tienes una cuenta? </Text>
+        <TouchableOpacity>
+          <Text style={[styles.enlace, styles.textInicioSesion]}>
+            Iniciar sesion
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -68,7 +111,21 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   buttonOptions: {
-    marginTop: 10,
+    backgroundColor: theme.colors.primary,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
+    marginTop: 15,
+  },
+  buttonText: {
+    color: "#fff",
+    textAlign: "center",
+  },
+  textInicioSesion: {
+    textAlign: "center",
+  },
+  enlace: {
+    fontWeight: "bold",
   },
 });
 
