@@ -7,11 +7,32 @@ import {
   TouchableOpacity,
 } from "react-native";
 import theme from "../theme";
+import axios from "axios";
 
 const Home = () => {
+  const [name1, setName1] = useState("");
+  const [name2, setName2] = useState("");
+  const [lastname1, setLastName1] = useState("");
+  const [lastname2, setLastName2] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const handleName1Change = (text) => {
+    setName1(text);
+  };
+  const handleName2Change = (text) => {
+    setName2(text);
+  };
+  const handleLastName1Change = (text) => {
+    setLastName1(text);
+  };
+  const handleLastName2Change = (text) => {
+    setLastName2(text);
+  };
+  const handleEmailChange = (text) => {
+    setEmail(text);
+  };
   const handlePasswordChange = (text) => {
     setPassword(text);
   };
@@ -20,11 +41,25 @@ const Home = () => {
     setConfirmPassword(text);
   };
 
-  const handleSubmit = () => {
-    if (password === confirmPassword) {
-      console.log("Contraseñas coinciden");
-    } else {
-      console.log("Las contraseñas no coinciden");
+  const handleSubmit = async () => {
+    // if (password === confirmPassword) {
+    //   console.log("Contraseñas coinciden");
+    // } else {
+    //   console.log("Las contraseñas no coinciden");
+    // }
+    console.log(name1);
+    try {
+      const response = await axios.post("http://192.168.1.37:3000/users", {
+        name1: name1,
+        name2: name2,
+        lastname1: lastname1,
+        lastname2: lastname2,
+        email: email,
+        password: password,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
     }
   };
   return (
@@ -35,6 +70,8 @@ const Home = () => {
         placeholder="Primer nombre"
         w="100%"
         style={styles.input}
+        value={name1}
+        onChangeText={handleName1Change}
       />
       <TextInput
         variant="outline"
@@ -42,6 +79,8 @@ const Home = () => {
         placeholder="Segundo nombre"
         w="100%"
         style={styles.input}
+        value={name2}
+        onChangeText={handleName2Change}
       />
       <TextInput
         variant="outline"
@@ -49,6 +88,8 @@ const Home = () => {
         placeholder="Primer apellido"
         w="100%"
         style={styles.input}
+        value={lastname1}
+        onChangeText={handleLastName1Change}
       />
       <TextInput
         variant="outline"
@@ -56,20 +97,18 @@ const Home = () => {
         placeholder="Segundo apellido"
         w="100%"
         style={styles.input}
+        value={lastname2}
+        onChangeText={handleLastName2Change}
       />
-      <TextInput
-        variant="outline"
-        size="md"
-        placeholder="Teléfono"
-        w="100%"
-        style={styles.input}
-      />
+
       <TextInput
         variant="outline"
         size="md"
         placeholder="Correo "
         w="100%"
         style={styles.input}
+        value={email}
+        onChangeText={handleEmailChange}
       />
       <TextInput
         style={styles.input}
