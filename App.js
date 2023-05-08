@@ -7,6 +7,8 @@ import BreatheScreen from "./src/components/BreatheScreen.jsx";
 import Register from "./src/pages/Register.jsx";
 import Home from "./src/pages/Home.jsx";
 import Login from "./src/pages/Login.jsx";
+import User from "./src/pages/User.jsx";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import theme from "./src/theme.js";
@@ -43,14 +45,28 @@ const App = () => {
             },
           }}
         />
+        <Stack.Screen
+          name="Usuario"
+          component={User}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MandalaScreen"
+          component={MandalaScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: theme.colors.dark,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="BreatheScreen"
+          component={BreatheScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-const styles = StyleSheet.create({
-  color: {
-    justifyContent: "center",
-  },
-});
 
 export default App;

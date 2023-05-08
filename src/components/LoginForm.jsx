@@ -5,26 +5,47 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import theme from "../theme";
+import env from "../../env";
+import { MaterialIcons } from "@expo/vector-icons";
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = () => {
+  const navigation = useNavigation();
+
+  const apiUrl = env;
+  const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handlePasswordChange = (text) => {
-    setPassword(text);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
-  const handleConfirmPasswordChange = (text) => {
-    setConfirmPassword(text);
-  };
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(apiUrl + "/users/login", {
+        email,
+        password,
+      });
+      // console.log(response.data);
 
-  const handleSubmit = () => {
-    if (password === confirmPassword) {
-      console.log("Contraseñas coinciden");
-    } else {
-      console.log("Las contraseñas no coinciden");
+      // Aquí puedes manejar la respuesta del servidor
+      // y realizar acciones adicionales según sea necesario
+      // Ejemplo de respuesta exitosa
+      if (response.status === 200) {
+        navigation.navigate("Usuario");
+      } else {
+        // Ejemplo de respuesta de error
+        Alert.alert("Error", response.data.message);
+      }
+    } catch (error) {
+      // Manejo de errores de la solicitud
+      Alert.alert("Error", "Ocurrió un error al iniciar sesión");
     }
   };
   return (
@@ -36,14 +57,24 @@ const LoginForm = () => {
           placeholder="Correo "
           w="100%"
           style={styles.input}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"
-          secureTextEntry
+          secureTextEntry={!showPassword}
           value={password}
-          onChangeText={handlePasswordChange}
+          onChangeText={(text) => setPassword(text)}
         />
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={togglePasswordVisibility}>
+          <MaterialIcons
+            name={showPassword ? "visibility-off" : "visibility"}
+            size={24}
+            color="gray"
+          />
+        </TouchableOpacity>
       </View>
 
       <TouchableOpacity style={styles.buttonOptions} onPress={handleSubmit}>

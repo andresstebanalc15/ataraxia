@@ -8,8 +8,11 @@ import {
 } from "react-native";
 import theme from "../theme";
 import axios from "axios";
+import env from "../../env";
 
 const Home = () => {
+  const apiUrl = env;
+
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
   const [lastname1, setLastName1] = useState("");
@@ -47,9 +50,9 @@ const Home = () => {
     // } else {
     //   console.log("Las contraseñas no coinciden");
     // }
-    console.log(name1);
+
     try {
-      const response = await axios.post("http://192.168.1.37:3000/users", {
+      const response = await axios.post(apiUrl + "/users", {
         name1: name1,
         name2: name2,
         lastname1: lastname1,
