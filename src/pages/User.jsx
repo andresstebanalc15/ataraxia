@@ -1,12 +1,16 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Logo from "../components/Logo";
 import PanelMandalas from "../components/PanelMandalas";
+import PanelBreathe from "../components/PanelBreathe";
+
+import HeaderUser from "../components/HeaderUser";
 
 const Register = () => {
   return (
     <View style={styles.color}>
+      <HeaderUser />
       <PanelMandalas />
+      <PanelBreathe />
     </View>
   );
 };

@@ -24,7 +24,7 @@ const App = () => {
         }}>
         <Stack.Screen
           name="Inicio"
-          component={Home}
+          component={BreatheScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -62,7 +62,11 @@ const App = () => {
         <Stack.Screen
           name="BreatheScreen"
           component={BreatheScreen}
-          options={{ headerShown: false }}
+          options={{
+            headerStyle: {
+              backgroundColor: theme.colors.ligth,
+            },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

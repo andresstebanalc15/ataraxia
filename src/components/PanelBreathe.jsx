@@ -6,18 +6,18 @@ const PanelMandalas = () => {
   const navigation = useNavigation();
 
   const onPressImage = () => {
-    navigation.navigate("MandalaScreen");
+    navigation.navigate("BreatheScreen");
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Diviértete, pintar trae tranquilidad </Text>
+      <Text style={styles.text}>Respira, te sentiras mejor </Text>
       <View style={styles.line}></View>
       <View style={styles.containerPanel}>
         <View style={styles.row}>
           <View style={[styles.cell, styles.containerImage]}>
             <TouchableOpacity onPress={onPressImage}>
               <Image
-                source={require("../../assets/captura.jpg")} // Ruta de la imagen local
+                source={require("../../assets/respiracion.jpg")} // Ruta de la imagen local
                 style={styles.image}
               />
               <View style={styles.overlay}></View>
@@ -63,14 +63,6 @@ const styles = StyleSheet.create({
   image: {
     width: 90,
     height: 90,
-  },
-  containerImage: {
-    position: "relative",
-  },
-
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(242, 242,242, 0.6)", // Color gris semi-transparente
   },
 });
 
