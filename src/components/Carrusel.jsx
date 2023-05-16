@@ -42,7 +42,7 @@ const App = () => {
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}>
         {phrases.map((item, index) => (
-          <View style={styles.containerText}>
+          <View style={styles.containerText} key={index}>
             <Text style={styles.text}>{item.phrase}</Text>
             <Text style={styles.text}>{item.author}</Text>
           </View>
