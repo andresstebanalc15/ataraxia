@@ -1,24 +1,37 @@
 import React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import theme from "../theme";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useDatosSesion } from "../context/DatosSesionProvider";
+import { useNavigation } from "@react-navigation/native";
 
 const HeaderUser = () => {
+  const navigation = useNavigation();
+
+  const { nombre, apellido, cerrarSesion } = useDatosSesion();
+  const handleCerrarSesion = () => {
+    cerrarSesion();
+    navigation.navigate("Iniciar sesión");
+  };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hola!, Andres Luna</Text>
-      <Text style={styles.text}>Hoy será un gran día</Text>
-
-      <View style={styles.circleBack}></View>
-      <Icon name="user" size={90} style={styles.icon} />
-
-      <View style={styles.circleFront}></View>
-
-      <View style={styles.line}></View>
-      <View style={styles.containerPanel}>
-        <View style={styles.row}>
-          <View style={styles.cell}></View>
-          <View style={styles.cell}></View>
+    <View>
+      <TouchableOpacity onPress={handleCerrarSesion}>
+        <Text style={styles.textExit}>Cerrar sesión</Text>
+      </TouchableOpacity>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Hola!, {nombre} {apellido}
+        </Text>
+        <Text style={styles.text}>Hoy será un gran día</Text>
+        <View style={styles.circleBack}></View>
+        <Icon name="user" size={90} style={styles.icon} />
+        <View style={styles.circleFront}></View>
+        <View style={styles.line}></View>
+        <View style={styles.containerPanel}>
+          <View style={styles.row}>
+            <View style={styles.cell}></View>
+            <View style={styles.cell}></View>
+          </View>
         </View>
       </View>
     </View>
@@ -26,6 +39,13 @@ const HeaderUser = () => {
 };
 
 const styles = StyleSheet.create({
+  textExit: {
+    textAlign: theme.align.right,
+    marginTop: 30,
+    padding: 10,
+    backgroundColor: theme.colors.secondary,
+    color: "#fff",
+  },
   container: {
     backgroundColor: theme.colors.ligth,
     paddingTop: 80,

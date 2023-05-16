@@ -5,12 +5,16 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import theme from "../theme";
 import axios from "axios";
 import env from "../../env";
+import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
+  const navigation = useNavigation();
+
   const apiUrl = env;
 
   const [name1, setName1] = useState("");
@@ -20,6 +24,17 @@ const Home = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const validateEmail = () => {
+    // Expresión regular para validar el formato de correo electrónico
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+
+    if (emailRegex.test(email)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const handleName1Change = (text) => {
     setName1(text);
@@ -45,24 +60,28 @@ const Home = () => {
   };
 
   const handleSubmit = async () => {
-    // if (password === confirmPassword) {
-    //   console.log("Contraseñas coinciden");
-    // } else {
-    //   console.log("Las contraseñas no coinciden");
-    // }
-
-    try {
-      const response = await axios.post(apiUrl + "/users", {
-        name1: name1,
-        name2: name2,
-        lastname1: lastname1,
-        lastname2: lastname2,
-        email: email,
-        password: password,
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
+    if (validateEmail()) {
+      if (password === confirmPassword) {
+        try {
+          const response = await axios.post(apiUrl + "/users", {
+            name1: name1,
+            name2: name2,
+            lastname1: lastname1,
+            lastname2: lastname2,
+            email: email,
+            password: password,
+          });
+          navigation.navigate("Iniciar sesión");
+        } catch (error) {
+          Alert.alert(
+            "El usuario no pudo ser creado. Utilice otro correo electrónico"
+          );
+        }
+      } else {
+        Alert.alert("Error, las contraseñas no coinciden");
+      }
+    } else {
+      Alert.alert("Error, correo invalido");
     }
   };
   return (

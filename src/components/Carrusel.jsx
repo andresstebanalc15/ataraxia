@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, ScrollView, Text, View, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import env from "../../env";
 
 import theme from "../theme";
+
 const App = () => {
+  const apiUrl = env;
+  const [phrases, setPhrases] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Lógica asíncrona que deseas ejecutar
+        const response = await fetch(apiUrl + "/phrase");
+        const data = await response.json();
+        setPhrases(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const navigation = useNavigation();
 
   const handleButton1Press = () => {
@@ -22,14 +41,12 @@ const App = () => {
         style={styles.container}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}>
-        <Text style={styles.text}>
-          Estoy aqui para ayudarte a reducir el estrés y evitar todo lo que trae
-          como consecuencia.
-        </Text>
-        <Text style={styles.text}>Texto 2</Text>
-        <Text style={styles.text}>Texto 3</Text>
-        <Text style={styles.text}>Texto 4</Text>
-        <Text style={styles.text}>Texto 5</Text>
+        {phrases.map((item, index) => (
+          <View style={styles.containerText}>
+            <Text style={styles.text}>{item.phrase}</Text>
+            <Text style={styles.text}>{item.author}</Text>
+          </View>
+        ))}
       </ScrollView>
       <View style={styles.containerButton}>
         <Button title="Iniciar sesión" onPress={handleButton1Press} />
@@ -44,11 +61,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     width: 300,
-    textAlign: "center",
     marginTop: 50,
     color: theme.colors.secondary,
-    padding: 7,
   },
+
   container: {
     borderColor: theme.colors.ligth,
     borderWidth: 2,
@@ -69,6 +85,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 50,
     marginTop: 50,
+  },
+  containerText: {
+    padding: 10,
   },
 });
 

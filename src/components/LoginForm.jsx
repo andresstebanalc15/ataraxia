@@ -12,8 +12,11 @@ import env from "../../env";
 import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { useDatosSesion } from "../context/DatosSesionProvider";
 
 const LoginForm = () => {
+  const { iniciarSesion } = useDatosSesion();
+
   const navigation = useNavigation();
 
   const apiUrl = env;
@@ -32,12 +35,16 @@ const LoginForm = () => {
         email,
         password,
       });
-      // console.log(response.data);
 
       // Aquí puedes manejar la respuesta del servidor
-      // y realizar acciones adicionales según sea necesario
-      // Ejemplo de respuesta exitosa
+
       if (response.status === 200) {
+        iniciarSesion(
+          response.data.user._id,
+          response.data.user.name1,
+          response.data.user.name2
+        );
+
         navigation.navigate("Usuario");
       } else {
         // Ejemplo de respuesta de error
