@@ -60,6 +60,7 @@ const App = () => {
               headerStyle: {
                 backgroundColor: theme.colors.dark,
               },
+              headerShown: false,
             }}
           />
           <Stack.Screen

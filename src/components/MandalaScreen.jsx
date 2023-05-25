@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Button } from "react-native";
-import { Svg, Path } from "react-native-svg";
+import { StyleSheet, View, Button } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+
 import PaleteColors from "./MandalaControls/PaleteColors";
+import MandalaSelector from "./MandalaControls/MandalaSelector";
+
 import env from "../../env";
+import { useDatosSesion } from "../context/DatosSesionProvider";
 
 const MandalaScreen = () => {
   const apiUrl = env;
-  const [idMandala, setIdMandala] = useState("6463040ff15393f48710b2f5");
-  const [colores, setColor] = useState([]);
+  const { id } = useDatosSesion();
+  const navigation = useNavigation();
+
   const [pallette, setPallette] = useState([]);
+  const route = useRoute();
+  const idMandalaUser = route.params?.idMandalaUser;
+
   useEffect(() => {
     const datos = {
-      _id: idMandala,
+      _id: idMandalaUser,
     };
     const fetchData = async () => {
       try {
@@ -26,7 +35,6 @@ const MandalaScreen = () => {
 
         const data = await response.json();
 
-        setColor(data.data);
         setPallette(data.palette);
       } catch (error) {
         console.error(error);
@@ -37,6 +45,10 @@ const MandalaScreen = () => {
   }, []);
 
   const [active, setActive] = useState("");
+
+  const onPressButton = (id) => {
+    navigation.navigate("Usuario", { key: new Date().getTime() });
+  };
 
   // const numberOfFigures = 30;
   // const angle = (2 * Math.PI) / numberOfFigures;
@@ -82,72 +94,28 @@ const MandalaScreen = () => {
 
   //   return objeto;
   // }
-
+  const tamanio = [-20, 0, 310, 150];
   // Estado para el color seleccionado
   const seleccionarColor = (color) => {
     setActive(color);
   };
 
-  const colorear = (id, color) => {
-    const actualizacionDeColores = colores.map((item) => {
-      if (item.id === id) {
-        return { ...item, color };
-      } else {
-        return item;
-      }
-    });
-    setColor(actualizacionDeColores);
-    console.log(id);
-
-    guardarProgreso(
-      "634444ff72a42c0834dca48b",
-      idMandala,
-      actualizacionDeColores
-    );
-  };
-
-  const guardarProgreso = async (id_user, id_mandala, data) => {
-    const datos = {
-      id_user,
-      id_mandala,
-      data,
-    };
-    try {
-      // Lógica asíncrona que deseas ejecutar
-      const response = await fetch(apiUrl + "/userMandala", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datos),
-      });
-
-      const respuesta = await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Svg width="500" height="500" viewBox="-20 0 310 150">
-          {colores.map((color) => (
-            <Path
-              key={color.id}
-              d={color.d}
-              fill={color.color}
-              stroke="#000"
-              onPress={() => colorear(color.id, active)}
-            />
-          ))}
-        </Svg>
+        <MandalaSelector
+          active={active}
+          sizeMandala={tamanio}
+          idMandalaUser={idMandalaUser}></MandalaSelector>
       </View>
       <View>
         <PaleteColors
           colores={pallette}
           seleccionarColor={seleccionarColor}
           active={active}></PaleteColors>
+      </View>
+      <View style={styles.content}>
+        <Button title="Regresar al inicio" onPress={onPressButton}></Button>
       </View>
     </View>
   );
