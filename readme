@@ -1,0 +1,13 @@
+Para instalar el proyecto, sigue los siguientes pasos:
+
+Es importante tener instalado NPM en el equipo: https://docs.npmjs.com/cli/v6/commands/npm-install
+
+1. Descarga el repositorio.
+2. Abre la terminal y navega hasta la raíz de la carpeta descargada.
+3. Ejecuta el comando "npm install" en la raíz y espera a que se instalen todas las dependencias.
+4. Modifica el archivo "env.js" en la raíz del proyecto y agrega la dirección IP del equipo en el que se ejecutará la aplicación.
+5. Ejecuta el comando "npm start" para comenzar a probar la aplicación. Al ejecutarlo, se mostrará un código QR que te permitirá ver la aplicación en tu dispositivo móvil (Android o iOS). Será necesario instalar "Expo Go" en el dispositivo.
+
+Nota:
+Inicialmente, no podrás ejecutar la aplicación si no has realizado la configuración del backend. Puedes realizar la instalación en el siguiente enlace:
+https://github.com/andresstebanalc15/back-ataraxia
