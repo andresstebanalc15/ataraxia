@@ -1,5 +1,3 @@
-import { useFonts } from "expo-font";
-
 const theme = {
   colors: {
     primary: "#3973BF",

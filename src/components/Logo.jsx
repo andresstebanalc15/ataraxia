@@ -4,7 +4,7 @@ import Svg, { Circle, Text } from "react-native-svg";
 import theme from "../theme";
 const Home = () => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="logoText">
       <Svg height="100" width="250">
         <Circle cx="120" cy="50" r="50" strokeWidth="1" style={styles.circle} />
         <Text
