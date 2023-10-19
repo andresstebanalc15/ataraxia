@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import MandalaSelector from "./MandalaControls/MandalaSelector";
+import theme from "../theme";
 
 const PanelMandalas = () => {
   const navigation = useNavigation();
@@ -25,16 +26,21 @@ const PanelMandalas = () => {
       <View style={styles.containerPanel}>
         <View style={styles.row}>
           <View style={[styles.cell, styles.containerImage]}>
-            <TouchableOpacity onPress={() => onPressImage(idMandalaUser)}>
+            <TouchableOpacity
+              onPress={() => onPressImage(idMandalaUser)}
+              style={styles.prueba}>
               <MandalaSelector
                 sizeMandala={tamanio}
                 idMandalaUser={idMandalaUser}
-                style={styles.image}
               />
             </TouchableOpacity>
           </View>
-          <View style={styles.cell}></View>
-          <View style={styles.cell}></View>
+          <View style={styles.cell}>
+            <Text style={styles.proximamente}> Próximamente</Text>
+          </View>
+          <View style={styles.cell}>
+            <Text style={styles.proximamente}> Próximamente</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -42,6 +48,9 @@ const PanelMandalas = () => {
 };
 
 const styles = StyleSheet.create({
+  prueba: {
+    height: 50,
+  },
   container: {
     backgroundColor: "#fff",
     zIndex: 999,
@@ -71,13 +80,14 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
-  image: {
-    width: 90,
-    height: 90,
-    zIndex: 9999,
-  },
+
   containerImage: {
     position: "relative",
+  },
+  proximamente: {
+    fontSize: 10,
+    textAlign: "center",
+    color: "#444",
   },
 
   overlay: {

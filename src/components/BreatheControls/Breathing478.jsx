@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Svg, Circle, G, Text } from "react-native-svg";
+import { View } from "react-native";
+import { Svg, Circle, G, Text, Button } from "react-native-svg";
 
 const Breathing478 = () => {
   const [count, setCount] = useState(0);
@@ -38,49 +39,60 @@ const Breathing478 = () => {
 
   const radius = 50;
 
+  const onPressButton = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Usuario" }],
+    });
+  };
   return (
-    <G>
-      <Circle
-        cx={200}
-        cy={200}
-        r={radius}
-        stroke="#000"
-        strokeWidth={2}
-        fill="transparent"
-      />
-      <Circle
-        cx={200}
-        cy={200}
-        r={radius * inhale()}
-        stroke="#00f"
-        strokeWidth={2}
-        fill="transparent"
-      />
-      <Circle
-        cx={200}
-        cy={200}
-        r={radius * (inhale() + hold())}
-        stroke="#0f0"
-        strokeWidth={2}
-        fill="transparent"
-      />
-      <Circle
-        cx={200}
-        cy={200}
-        r={radius * (inhale() + hold() + exhale())}
-        stroke="#f00"
-        strokeWidth={2}
-        fill="transparent"
-      />
-      <Text
-        x={200}
-        y={200}
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontSize={20}>
-        Hola {count % duration}
-      </Text>
-    </G>
+    <View>
+      <G>
+        <Circle
+          cx={200}
+          cy={200}
+          r={radius}
+          stroke="#000"
+          strokeWidth={2}
+          fill="red"
+        />
+        <Circle
+          cx={200}
+          cy={200}
+          r={radius * inhale()}
+          stroke="#00f"
+          strokeWidth={2}
+          fill="red"
+        />
+        <Circle
+          cx={200}
+          cy={200}
+          r={radius * (inhale() + hold())}
+          stroke="#0f0"
+          strokeWidth={2}
+          fill="red"
+        />
+        <Circle
+          cx={200}
+          cy={200}
+          r={radius * (inhale() + hold() + exhale())}
+          stroke="#f00"
+          strokeWidth={2}
+          fill="red"
+        />
+        <Text
+          x={200}
+          y={200}
+          textAnchor="middle"
+          dominantBaseline="central"
+          fontSize={20}>
+          Hola {count % duration}
+        </Text>
+      </G>
+      <View>
+        <Button title="Regresar al inicio" onPress={onPressButton}></Button>
+      </View>
+    </View>
   );
 };
 

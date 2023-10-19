@@ -21,7 +21,9 @@ const LoginForm = () => {
 
   const apiUrl = env;
   const [email, setEmail] = useState("");
-
+  const handleButton2Press = () => {
+    navigation.navigate("Registrarme");
+  };
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -94,7 +96,9 @@ const LoginForm = () => {
           aprovechar todos nuestros los beneficios de ataraxia.
         </Text>
         <TouchableOpacity>
-          <Text style={[styles.enlace, styles.textInicioSesion]}>
+          <Text
+            style={[styles.enlace, styles.textInicioSesion]}
+            onPress={handleButton2Press}>
             Registarme
           </Text>
         </TouchableOpacity>

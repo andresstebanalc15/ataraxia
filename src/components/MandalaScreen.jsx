@@ -46,8 +46,11 @@ const MandalaScreen = () => {
 
   const [active, setActive] = useState("");
 
-  const onPressButton = (id) => {
-    navigation.navigate("Usuario", { key: new Date().getTime() });
+  const onPressButton = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Usuario" }],
+    });
   };
 
   // const numberOfFigures = 30;

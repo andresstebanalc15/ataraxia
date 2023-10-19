@@ -70,6 +70,7 @@ const App = () => {
               headerStyle: {
                 backgroundColor: theme.colors.ligth,
               },
+              headerShown: false,
             }}
           />
         </Stack.Navigator>

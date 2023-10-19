@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from "react-native";
 import theme from "../theme";
 import axios from "axios";
@@ -34,6 +35,9 @@ const Home = () => {
     } else {
       return false;
     }
+  };
+  const handleButton1Press = () => {
+    navigation.navigate("Iniciar sesión");
   };
 
   const handleName1Change = (text) => {
@@ -85,7 +89,7 @@ const Home = () => {
     }
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TextInput
         variant="outline"
         size="md"
@@ -152,12 +156,14 @@ const Home = () => {
       <View style={styles.container}>
         <Text style={styles.textInicioSesion}> ¿Ya tienes una cuenta? </Text>
         <TouchableOpacity>
-          <Text style={[styles.enlace, styles.textInicioSesion]}>
+          <Text
+            style={[styles.enlace, styles.textInicioSesion]}
+            onPress={handleButton1Press}>
             Iniciar sesion
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
