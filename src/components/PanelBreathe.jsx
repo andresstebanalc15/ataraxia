@@ -23,8 +23,12 @@ const PanelMandalas = () => {
               <View style={styles.overlay}></View>
             </TouchableOpacity>
           </View>
-          <View style={styles.cell}></View>
-          <View style={styles.cell}></View>
+          <View style={styles.cell}>
+            <Text style={styles.proximamente}> Próximamente</Text>
+          </View>
+          <View style={styles.cell}>
+            <Text style={styles.proximamente}> Próximamente</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -59,6 +63,11 @@ const styles = StyleSheet.create({
     borderBottomColor: "#f1f1f2",
     marginLeft: 10,
     marginRight: 10,
+  },
+  proximamente: {
+    fontSize: 10,
+    textAlign: "center",
+    color: "#444",
   },
   image: {
     width: 90,

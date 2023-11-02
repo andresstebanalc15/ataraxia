@@ -9,8 +9,9 @@ const Register = () => {
   return (
     <View style={styles.color}>
       <HeaderUser />
-      <PanelMandalas />
       <PanelBreathe />
+
+      <PanelMandalas />
     </View>
   );
 };
